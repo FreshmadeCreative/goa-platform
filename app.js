@@ -540,7 +540,7 @@ function renderModals(){
 
 // ─── CLIENT-SIDE PPTX EXPORT ──────────────────────────────────────────────────
 function generatePPTX(type,client,period){
-  if(!window.PptxGenJS){alert('PptxGenJS still loading — try again in a moment.');return;}
+  if(!window.PptxGenJS){setTimeout(()=>generatePPTX(type,client,period),500);return;}
   const pptx=new PptxGenJS();
   pptx.layout='LAYOUT_WIDE';
   const RED='C8102E',DARK='111827',WHITE='FFFFFF',GRAY='6B7280',LT='F9FAFB';
