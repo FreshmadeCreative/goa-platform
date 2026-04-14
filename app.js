@@ -440,6 +440,23 @@ function clearAvailSel(){availSelSites.clear();document.querySelectorAll('.avail
 function addToProposal(){nav(document.querySelectorAll('.nav-item')[9],'proposal');}
 
 // ─── MOVE CSV EXPORT ──────────────────────────────────────────────────────────
+function exportProposalMOVECSV(){
+  // Uses the 3 proposal sites (hardcoded for Alliance Media LP9 demo)
+  const proposalSites=[
+    {ims:'23276',start:'2026-02-09',end:'2026-03-08',share:'0.1',spot:'8'},
+    {ims:'23288',start:'2026-02-09',end:'2026-03-08',share:'0.1',spot:'15'},
+    {ims:'23292',start:'2026-02-09',end:'2026-03-08',share:'0.1',spot:'15'},
+  ];
+  if(!window.XLSX){alert('XLSX library still loading — try again in a moment.');return;}
+  const rows=[['IMS_FaceID','Start_Date','End_Date','Share_of_time','Display_Length'],
+    ...proposalSites.map(s=>[s.ims,s.start,s.end,s.share,s.spot])];
+  const wb=XLSX.utils.book_new();
+  const ws=XLSX.utils.aoa_to_sheet(rows);
+  ws['!cols']=[{wch:14},{wch:12},{wch:12},{wch:14},{wch:14}];
+  XLSX.utils.book_append_sheet(wb,ws,'MOVE Upload');
+  XLSX.writeFile(wb,'Alliance_Media_LP9_MOVE_upload.csv');
+}
+
 function exportMOVECSV(){
   const from=$('avail-from')?.value||''; const to=$('avail-to')?.value||'';
   const activeLPs=getActiveLPs();
@@ -501,7 +518,8 @@ function propDetail(){return`<div id="pd-1" class="prop-detail open"><div class=
   <div class="pd-col pd-summary-col"><div class="pd-section-title">Summary</div><div class="pd-total-block"><div class="pd-total-label">Total investment</div><div class="pd-total-val">$48,300</div></div>
   <div class="pd-sum-rows"><div class="pd-sum-row"><span>Sites</span><span>3</span></div><div class="pd-sum-row"><span>Format</span><span>Iconic + Digital</span></div><div class="pd-sum-row"><span>Weeks</span><span>4</span></div><div class="pd-sum-row"><span>CPM est.</span><span>$22.60</span></div></div>
   <button class="btn-primary sm" style="width:100%;margin-top:14px">Submit for approval</button>
-  <button class="btn-ghost sm" style="width:100%;margin-top:6px" onclick="generatePPTX('proposal','Alliance Media','LP9 2026')">↓ Export as PPTX</button></div>
+  <button class="btn-ghost sm" style="width:100%;margin-top:6px" onclick="generatePPTX('proposal','Alliance Media','LP9 2026')">↓ Export as PPTX</button>
+  <button class="btn-ghost sm" style="width:100%;margin-top:6px" onclick="exportProposalMOVECSV()">↓ Export MOVE CSV</button></div>
 </div></div>`;}
 function toggleProp(id,row){const d=$(id);if(!d)return;const open=d.classList.contains('open');if(open){d.classList.remove('open');d.style.display='none';row.classList.remove('open');row.querySelector('.prop-chev')?.classList.remove('open');}else{d.classList.add('open');d.style.display='block';row.classList.add('open');row.querySelector('.prop-chev')?.classList.add('open');}}
 
@@ -540,8 +558,8 @@ function renderModals(){
 
 // ─── CLIENT-SIDE PPTX EXPORT ──────────────────────────────────────────────────
 function generatePPTX(type,client,period){
-  if(!window.PptxGenJS){setTimeout(()=>generatePPTX(type,client,period),500);return;}
-  const pptx=new PptxGenJS();
+  const PptxCtor=window.PptxGenJS||window.pptxgen;if(!PptxCtor){setTimeout(()=>generatePPTX(type,client,period),500);return;}
+  const pptx=new (window.PptxGenJS||window.pptxgen)();
   pptx.layout='LAYOUT_WIDE';
   const RED='C8102E',DARK='111827',WHITE='FFFFFF',GRAY='6B7280',LT='F9FAFB';
 
