@@ -7,9 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
-<body class="page-login">
-
-<!-- LOGIN PAGE -->
+<body>
 <div id="login-page" class="page active">
   <div class="login-wrap">
     <div class="login-left">
@@ -20,7 +18,7 @@
       <div class="login-stats">
         <div class="ls"><div class="ls-val">$1.2M</div><div class="ls-label">Revenue YTD</div></div>
         <div class="ls"><div class="ls-val">19</div><div class="ls-label">Active clients</div></div>
-        <div class="ls"><div class="ls-val">47</div><div class="ls-label">Sites live</div></div>
+        <div class="ls"><div class="ls-val">532</div><div class="ls-label">Sites total</div></div>
       </div>
     </div>
     <div class="login-right">
@@ -28,14 +26,8 @@
         <div class="login-card-brand"><span class="brand-red">goa</span></div>
         <h2>Welcome back</h2>
         <p class="login-sub">Sign in to your workspace</p>
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" placeholder="you@goa.com.au" id="login-email" value="hannah@goa.com.au">
-        </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input type="password" placeholder="••••••••" id="login-pass" value="password">
-        </div>
+        <div class="form-group"><label>Email</label><input type="email" id="login-email" value="hannah@goa.com.au"></div>
+        <div class="form-group"><label>Password</label><input type="password" id="login-pass" value="password"></div>
         <div class="form-row-between">
           <label class="checkbox-label"><input type="checkbox" checked> Remember me</label>
           <a href="#" class="link-muted">Forgot password?</a>
@@ -46,642 +38,50 @@
     </div>
   </div>
 </div>
-
-<!-- MAIN APP -->
 <div id="app-page" class="page">
   <div class="app-shell">
-
-    <!-- SIDEBAR -->
     <aside class="sidebar">
-      <div class="sidebar-brand">
-        <div class="brand-logo sm"><span class="brand-red">goa</span></div>
-      </div>
+      <div class="sidebar-brand"><div class="brand-logo sm"><span class="brand-red">goa</span></div></div>
       <nav class="sidebar-nav">
         <div class="nav-section">Clients</div>
-        <a class="nav-item active" onclick="showScreen('contacts')" href="#">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          Contacts
-        </a>
-        <a class="nav-item" onclick="showScreen('prospects')" href="#">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          Prospects
-          <span class="nav-badge">5</span>
-        </a>
-        <a class="nav-item" onclick="showScreen('bookings')" href="#">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          Active bookings
-          <span class="nav-badge green">12</span>
-        </a>
-        <a class="nav-item" onclick="showScreen('renewals')" href="#">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-          Renewals
-          <span class="nav-badge red">4</span>
-        </a>
+        <a class="nav-item active" onclick="nav(this,'contacts')" href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>Contacts</a>
+        <a class="nav-item" onclick="nav(this,'prospects')" href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Prospects<span class="nav-badge">5</span></a>
+        <a class="nav-item" onclick="nav(this,'bookings')" href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Active bookings<span class="nav-badge green">12</span></a>
+        <a class="nav-item" onclick="nav(this,'renewals')" href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>Renewals<span class="nav-badge red">4</span></a>
         <div class="nav-section">Analytics</div>
-        <a class="nav-item" onclick="showScreen('dashboard')" href="#">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-          Dashboard
-        </a>
-        <a class="nav-item" onclick="showScreen('reports')" href="#">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-          Reports
-        </a>
-        <a class="nav-item" onclick="showScreen('ai')" href="#">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          AI buddy
-        </a>
+        <a class="nav-item" onclick="nav(this,'dashboard')" href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Dashboard</a>
+        <a class="nav-item" onclick="nav(this,'reports')" href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Reports</a>
+        <a class="nav-item" onclick="nav(this,'ai')" href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>AI buddy</a>
         <div class="nav-section">Workspace</div>
-        <a class="nav-item" onclick="showScreen('availability')" href="#">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Availability
-        </a>
-        <a class="nav-item" onclick="showScreen('proposal')" href="#">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-          Proposal builder
-          <span class="nav-badge">2</span>
-        </a>
-        <a class="nav-item" onclick="showScreen('approvals')" href="#">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-          Approvals
-          <span class="nav-badge red">3</span>
-        </a>
+        <a class="nav-item" onclick="nav(this,'availability')" href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Availability</a>
+        <a class="nav-item" onclick="nav(this,'proposal')" href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Proposals<span class="nav-badge">3</span></a>
+        <a class="nav-item" onclick="nav(this,'approvals')" href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Approvals<span class="nav-badge red">3</span></a>
         <div class="nav-section">Hub</div>
-        <a class="nav-item" onclick="showScreen('brand')" href="#">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          Brand hub
-        </a>
+        <a class="nav-item" onclick="nav(this,'brand')" href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Brand hub</a>
       </nav>
       <div class="sidebar-user" onclick="doLogout()">
         <div class="user-avatar">HF</div>
-        <div class="user-info">
-          <div class="user-name">Hannah F.</div>
-          <div class="user-role">Senior · QLD</div>
-        </div>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:auto;opacity:0.4"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        <div class="user-info"><div class="user-name">Hannah F.</div><div class="user-role">Senior · QLD</div></div>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:auto;opacity:0.35"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
       </div>
     </aside>
-
-    <!-- MAIN CONTENT -->
-    <main class="main-content">
-
-      <!-- CONTACTS -->
-      <div id="screen-contacts" class="screen active">
-        <div class="screen-header">
-          <div>
-            <h1>Contacts</h1>
-            <p class="screen-sub">28 clients · 19 active</p>
-          </div>
-          <div class="header-actions">
-            <select class="select-sm"><option>All status</option><option>Active</option><option>Inactive</option></select>
-            <button class="btn-primary sm">+ New contact</button>
-          </div>
-        </div>
-        <div class="tabs">
-          <button class="tab active" onclick="setTab(this)">All (28)</button>
-          <button class="tab" onclick="setTab(this)">Active (19)</button>
-          <button class="tab" onclick="setTab(this)">Inactive (9)</button>
-        </div>
-        <div class="table-card">
-          <table class="data-table">
-            <thead><tr>
-              <th>Client</th><th>Status</th><th>Last campaign</th><th>LTV</th><th>Next renewal</th><th></th>
-            </tr></thead>
-            <tbody>
-              <tr onclick="toggleDetail('suncorp-detail')">
-                <td><div class="client-cell"><div class="avatar av-blue">SC</div><div><div class="client-name">Suncorp</div><div class="client-sub">Emma Walsh · Marketing Lead</div></div></div></td>
-                <td><span class="pill pill-green">Active</span></td>
-                <td class="text-muted">LP8 2026</td>
-                <td class="text-muted">$248k</td>
-                <td><span class="pill pill-amber">28 days</span></td>
-                <td><button class="btn-ghost sm">View</button></td>
-              </tr>
-              <tr id="suncorp-detail" class="detail-row" style="display:none">
-                <td colspan="6">
-                  <div class="detail-panel">
-                    <div class="detail-stats">
-                      <div class="dstat"><div class="dstat-val">$248k</div><div class="dstat-label">Total spend</div></div>
-                      <div class="dstat"><div class="dstat-val">2019</div><div class="dstat-label">Client since</div></div>
-                      <div class="dstat"><div class="dstat-val">$41k</div><div class="dstat-label">Avg campaign</div></div>
-                      <div class="dstat"><div class="dstat-val">6</div><div class="dstat-label">Campaigns</div></div>
-                    </div>
-                    <div class="detail-note">
-                      <div class="note-label">Last contact note</div>
-                      <div class="note-text">Called Emma re: LP10 renewal. She's keen on digital-only for H2. Budget confirmed at $45k. Follow up 14 Apr with proposal. <span class="note-date">— 10 Apr 2026</span></div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr onclick="toggleDetail('alliance-detail')">
-                <td><div class="client-cell"><div class="avatar av-red">AM</div><div><div class="client-name">Alliance Media</div><div class="client-sub">Tom Reid · Director</div></div></div></td>
-                <td><span class="pill pill-green">Active</span></td>
-                <td class="text-muted">LP9 2026</td>
-                <td class="text-muted">$91k</td>
-                <td><span class="pill pill-green">62 days</span></td>
-                <td><button class="btn-ghost sm">View</button></td>
-              </tr>
-              <tr id="alliance-detail" class="detail-row" style="display:none">
-                <td colspan="6">
-                  <div class="detail-panel">
-                    <div class="detail-stats">
-                      <div class="dstat"><div class="dstat-val">$91k</div><div class="dstat-label">Total spend</div></div>
-                      <div class="dstat"><div class="dstat-val">2022</div><div class="dstat-label">Client since</div></div>
-                      <div class="dstat"><div class="dstat-val">$30k</div><div class="dstat-label">Avg campaign</div></div>
-                      <div class="dstat"><div class="dstat-val">3</div><div class="dstat-label">Campaigns</div></div>
-                    </div>
-                    <div class="detail-note">
-                      <div class="note-label">Last contact note</div>
-                      <div class="note-text">Tom confirmed LP9 goes ahead. 3 North Corridor digital sites. Contract signed. Artwork due 28 Jan. <span class="note-date">— 15 Jan 2026</span></div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td><div class="client-cell"><div class="avatar av-green">QL</div><div><div class="client-name">Queensland Rail</div><div class="client-sub">Sarah Kim · Comms Manager</div></div></div></td>
-                <td><span class="pill pill-green">Active</span></td>
-                <td class="text-muted">LP7 2026</td>
-                <td class="text-muted">$184k</td>
-                <td><span class="pill pill-red">7 days</span></td>
-                <td><button class="btn-ghost sm">View</button></td>
-              </tr>
-              <tr>
-                <td><div class="client-cell"><div class="avatar av-purple">OW</div><div><div class="client-name">OzWine Group</div><div class="client-sub">Ben Caruso · Brand Mgr</div></div></div></td>
-                <td><span class="pill pill-gray">Inactive</span></td>
-                <td class="text-muted">Q3 2025</td>
-                <td class="text-muted">$62k</td>
-                <td class="text-muted">—</td>
-                <td><button class="btn-ghost sm">View</button></td>
-              </tr>
-              <tr>
-                <td><div class="client-cell"><div class="avatar av-blue">BQ</div><div><div class="client-name">BrisQuad FC</div><div class="client-sub">Jade Osei · Marketing</div></div></div></td>
-                <td><span class="pill pill-green">Active</span></td>
-                <td class="text-muted">LP9 2026</td>
-                <td class="text-muted">$33k</td>
-                <td><span class="pill pill-green">45 days</span></td>
-                <td><button class="btn-ghost sm">View</button></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- PROSPECTS -->
-      <div id="screen-prospects" class="screen">
-        <div class="screen-header">
-          <div><h1>Prospects</h1><p class="screen-sub">5 in pipeline · $340k potential</p></div>
-          <button class="btn-primary sm">+ Add prospect</button>
-        </div>
-        <div class="metric-grid four">
-          <div class="metric-card"><div class="metric-label">Pipeline value</div><div class="metric-val">$340k</div></div>
-          <div class="metric-card"><div class="metric-label">Avg deal size</div><div class="metric-val">$68k</div></div>
-          <div class="metric-card"><div class="metric-label">Win rate (90d)</div><div class="metric-val">38%</div></div>
-          <div class="metric-card"><div class="metric-label">Avg days to close</div><div class="metric-val">24</div></div>
-        </div>
-        <div class="table-card">
-          <table class="data-table">
-            <thead><tr><th>Prospect</th><th>Stage</th><th>Value</th><th>Last touch</th><th>AI insight</th><th></th></tr></thead>
-            <tbody>
-              <tr>
-                <td><div class="client-cell"><div class="avatar av-red">HV</div><div><div class="client-name">Harvey Norman</div><div class="client-sub">Mark D. · Retail Marketing</div></div></div></td>
-                <td><span class="pill pill-amber">Proposal sent</span></td>
-                <td class="text-muted">$120k</td>
-                <td class="text-muted">2 days ago</td>
-                <td><span class="insight-tag">Opened proposal 3×</span></td>
-                <td><button class="btn-ghost sm">Action</button></td>
-              </tr>
-              <tr>
-                <td><div class="client-cell"><div class="avatar av-green">WW</div><div><div class="client-name">Woolworths QLD</div><div class="client-sub">Amy C. · Shopper Mktg</div></div></div></td>
-                <td><span class="pill pill-blue">Meeting booked</span></td>
-                <td class="text-muted">$85k</td>
-                <td class="text-muted">Today</td>
-                <td><span class="insight-tag blue">Meeting in 2 days</span></td>
-                <td><button class="btn-ghost sm">Action</button></td>
-              </tr>
-              <tr>
-                <td><div class="client-cell"><div class="avatar av-purple">MR</div><div><div class="client-name">Myer Retail</div><div class="client-sub">Chris T. · Brand Mgr</div></div></div></td>
-                <td><span class="pill pill-gray">Outreach</span></td>
-                <td class="text-muted">$60k</td>
-                <td class="text-muted">5 days ago</td>
-                <td><span class="insight-tag amber">No reply — follow up</span></td>
-                <td><button class="btn-ghost sm">Action</button></td>
-              </tr>
-              <tr>
-                <td><div class="client-cell"><div class="avatar av-blue">TL</div><div><div class="client-name">Telstra Local</div><div class="client-sub">Nina P. · Media Buyer</div></div></div></td>
-                <td><span class="pill pill-amber">Avails sent</span></td>
-                <td class="text-muted">$45k</td>
-                <td class="text-muted">Yesterday</td>
-                <td><span class="insight-tag blue">Budget confirmed</span></td>
-                <td><button class="btn-ghost sm">Action</button></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="ai-insight-box">
-          <div class="ai-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-          <div class="ai-text">Harvey Norman has viewed your proposal 3 times — strong buying signal. Woolworths meeting Wednesday — prepare North Corridor + Inner West options. Myer at 5 days no reply; try a new contact or send a different hook.</div>
-        </div>
-      </div>
-
-      <!-- ACTIVE BOOKINGS -->
-      <div id="screen-bookings" class="screen">
-        <div class="screen-header">
-          <div><h1>Active bookings</h1><p class="screen-sub">12 live campaigns · 2 with warnings</p></div>
-        </div>
-        <div class="tabs">
-          <button class="tab active" onclick="setTab(this)">All (12)</button>
-          <button class="tab" onclick="setTab(this)">Live now (8)</button>
-          <button class="tab tab-warn" onclick="setTab(this)">Warnings (2)</button>
-        </div>
-        <div class="table-card">
-          <table class="data-table">
-            <thead><tr><th>Campaign</th><th>Period</th><th>Sites</th><th>Value</th><th>Status</th><th>Warning</th></tr></thead>
-            <tbody>
-              <tr>
-                <td><div class="client-cell"><div class="avatar av-blue">SC</div><div><div class="client-name">Suncorp · Static Run</div><div class="client-sub">LP9–10 2026</div></div></div></td>
-                <td class="text-muted">2 Feb – 1 Apr</td><td class="text-muted">6 sites</td><td class="text-muted">$91,500</td>
-                <td><span class="pill pill-green">Live</span></td>
-                <td><span class="warn-tag">Artwork missing (1)</span></td>
-              </tr>
-              <tr>
-                <td><div class="client-cell"><div class="avatar av-green">QL</div><div><div class="client-name">QLD Rail · Digital</div><div class="client-sub">LP9 2026</div></div></div></td>
-                <td class="text-muted">2 Feb – 1 Mar</td><td class="text-muted">4 sites</td><td class="text-muted">$48,200</td>
-                <td><span class="pill pill-green">Live</span></td>
-                <td><span class="warn-tag">PO outstanding</span></td>
-              </tr>
-              <tr>
-                <td><div class="client-cell"><div class="avatar av-red">AM</div><div><div class="client-name">Alliance Media</div><div class="client-sub">LP9 2026</div></div></div></td>
-                <td class="text-muted">2 Feb – 1 Mar</td><td class="text-muted">3 sites</td><td class="text-muted">$48,300</td>
-                <td><span class="pill pill-green">Live</span></td>
-                <td class="text-muted">—</td>
-              </tr>
-              <tr>
-                <td><div class="client-cell"><div class="avatar av-purple">BQ</div><div><div class="client-name">BrisQuad FC</div><div class="client-sub">LP9 2026</div></div></div></td>
-                <td class="text-muted">2 Feb – 1 Mar</td><td class="text-muted">2 sites</td><td class="text-muted">$18,600</td>
-                <td><span class="pill pill-blue">Upcoming</span></td>
-                <td class="text-muted">—</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- RENEWALS -->
-      <div id="screen-renewals" class="screen">
-        <div class="screen-header">
-          <div><h1>Renewals</h1><p class="screen-sub">$342k at stake this quarter</p></div>
-        </div>
-        <div class="metric-grid four">
-          <div class="metric-card"><div class="metric-label">Due &lt;7 days</div><div class="metric-val red">1</div></div>
-          <div class="metric-card"><div class="metric-label">Due &lt;30 days</div><div class="metric-val amber">2</div></div>
-          <div class="metric-card"><div class="metric-label">Due &lt;60 days</div><div class="metric-val">4</div></div>
-          <div class="metric-card"><div class="metric-label">Total at stake</div><div class="metric-val">$342k</div></div>
-        </div>
-        <div class="renewal-framework">
-          <div class="rf-title">Renewal framework</div>
-          <div class="rf-steps">
-            <div class="rf-step"><div class="rf-step-label">60 days out</div><div class="rf-step-body">Send post-campaign report. Open conversation on next period.</div></div>
-            <div class="rf-arrow">→</div>
-            <div class="rf-step"><div class="rf-step-label">30 days out</div><div class="rf-step-body">Present new avails. Confirm budget. Send proposal.</div></div>
-            <div class="rf-arrow">→</div>
-            <div class="rf-step"><div class="rf-step-label">7 days out</div><div class="rf-step-body">Follow up. Generate final report. Push to close.</div></div>
-          </div>
-        </div>
-        <div class="table-card">
-          <table class="data-table">
-            <thead><tr><th>Client</th><th>Renewal due</th><th>Est. value</th><th>Stage</th><th>Action</th></tr></thead>
-            <tbody>
-              <tr>
-                <td><div class="client-cell"><div class="avatar av-green">QL</div><div><div class="client-name">Queensland Rail</div><div class="client-sub">Sarah Kim</div></div></div></td>
-                <td><span class="pill pill-red">7 days</span></td>
-                <td class="text-muted">$52k</td>
-                <td><span class="pill pill-amber">Proposal out</span></td>
-                <td><button class="btn-primary sm">Generate report</button></td>
-              </tr>
-              <tr>
-                <td><div class="client-cell"><div class="avatar av-blue">SC</div><div><div class="client-name">Suncorp</div><div class="client-sub">Emma Walsh</div></div></div></td>
-                <td><span class="pill pill-amber">28 days</span></td>
-                <td class="text-muted">$45k</td>
-                <td><span class="pill pill-blue">Avails sent</span></td>
-                <td><button class="btn-ghost sm">Build proposal</button></td>
-              </tr>
-              <tr>
-                <td><div class="client-cell"><div class="avatar av-red">HV</div><div><div class="client-name">Harvey Norman</div><div class="client-sub">Mark D.</div></div></div></td>
-                <td><span class="pill pill-green">62 days</span></td>
-                <td class="text-muted">$120k</td>
-                <td><span class="pill pill-gray">Not started</span></td>
-                <td><button class="btn-ghost sm">Send report</button></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- DASHBOARD -->
-      <div id="screen-dashboard" class="screen">
-        <div class="screen-header">
-          <div><h1>Dashboard</h1><p class="screen-sub">YTD 2026 · QLD portfolio</p></div>
-          <select class="select-sm"><option>YTD 2026</option><option>Q1 2026</option><option>FY 2025</option></select>
-        </div>
-        <div class="metric-grid four">
-          <div class="metric-card"><div class="metric-label">Active clients</div><div class="metric-val">19</div><div class="metric-delta up">+3 vs last year</div></div>
-          <div class="metric-card"><div class="metric-label">Revenue YTD</div><div class="metric-val">$1.2M</div><div class="metric-delta">82% of target</div></div>
-          <div class="metric-card"><div class="metric-label">Renewals at risk</div><div class="metric-val red">$342k</div><div class="metric-delta">4 clients</div></div>
-          <div class="metric-card"><div class="metric-label">Avg client LTV</div><div class="metric-val">$128k</div><div class="metric-delta">3.2yr lifespan</div></div>
-        </div>
-        <div class="dash-grid">
-          <div class="dash-card">
-            <div class="dash-card-title">Revenue vs target</div>
-            <div class="chart-area" id="rev-chart-area">
-              <canvas id="rev-chart" width="400" height="180"></canvas>
-            </div>
-          </div>
-          <div class="dash-card">
-            <div class="dash-card-title">Pipeline forecast</div>
-            <div class="pipeline-total">$480k <span>weighted · 60 days</span></div>
-            <div class="pipeline-bars">
-              <div class="pb-row"><span>Harvey Norman</span><div class="pb-track"><div class="pb-fill" style="width:100%"></div></div><span>$120k</span></div>
-              <div class="pb-row"><span>Woolworths</span><div class="pb-track"><div class="pb-fill" style="width:71%"></div></div><span>$85k</span></div>
-              <div class="pb-row"><span>Myer</span><div class="pb-track"><div class="pb-fill" style="width:50%"></div></div><span>$60k</span></div>
-              <div class="pb-row"><span>Suncorp renewal</span><div class="pb-track"><div class="pb-fill" style="width:37%"></div></div><span>$45k</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="action-items">
-          <div class="ai-title">Action items</div>
-          <div class="action-item urgent"><div class="ai-dot red"></div><div class="ai-body">QLD Rail renewal due in 7 days — close or lose $52k</div><button class="btn-ghost sm">Action</button></div>
-          <div class="action-item"><div class="ai-dot amber"></div><div class="ai-body">Suncorp artwork missing for LP9 — chase today</div><button class="btn-ghost sm">Action</button></div>
-          <div class="action-item"><div class="ai-dot amber"></div><div class="ai-body">Harvey Norman has viewed proposal 3× — call today</div><button class="btn-ghost sm">Action</button></div>
-          <div class="action-item"><div class="ai-dot gray"></div><div class="ai-body">Myer — no reply in 5 days, try new contact</div><button class="btn-ghost sm">Action</button></div>
-        </div>
-      </div>
-
-      <!-- REPORTS -->
-      <div id="screen-reports" class="screen">
-        <div class="screen-header">
-          <div><h1>Reports</h1><p class="screen-sub">Revenue · Pipeline · Bonus</p></div>
-          <button class="btn-primary sm">Generate bonus report</button>
-        </div>
-        <div class="metric-grid three">
-          <div class="metric-card"><div class="metric-label">Billed YTD</div><div class="metric-val">$1.24M</div></div>
-          <div class="metric-card"><div class="metric-label">Vs target</div><div class="metric-val green">+4%</div></div>
-          <div class="metric-card"><div class="metric-label">Full year forecast</div><div class="metric-val">$2.8M</div></div>
-        </div>
-        <div class="dash-card" style="margin-top:16px">
-          <div class="dash-card-title">Revenue by format — LP9 2026</div>
-          <div class="chart-area"><canvas id="format-chart" width="400" height="200"></canvas></div>
-          <div class="chart-legend">
-            <span><i style="background:#111827"></i>Iconic $510k</span>
-            <span><i style="background:#C8102E"></i>Digital $420k</span>
-            <span><i style="background:#9CA3AF"></i>Static $310k</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- AI BUDDY -->
-      <div id="screen-ai" class="screen">
-        <div class="screen-header">
-          <div><h1>AI buddy</h1><p class="screen-sub">Week of 14 Apr 2026</p></div>
-        </div>
-        <div class="ai-week-brief">
-          <div class="aib-header"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Your week at a glance</div>
-          <div class="aib-items">
-            <div class="aib-item red"><div class="aib-dot"></div>QLD Rail renewal expires in 7 days. They've been a $184k LTV client — prioritise above new business this week.</div>
-            <div class="aib-item amber"><div class="aib-dot"></div>Harvey Norman viewed your proposal 3 times. Best call window based on past engagement: Tue–Wed 10–11am.</div>
-            <div class="aib-item green"><div class="aib-dot"></div>Woolworths meeting Wednesday — they tend to buy corridor packages. Prepare North + Inner West options.</div>
-          </div>
-        </div>
-        <div class="dash-grid" style="margin-top:16px">
-          <div class="dash-card"><div class="dash-card-title">Digital fill rate up</div><div style="font-size:13px;color:var(--text-secondary);line-height:1.6">Digital inventory is 91% sold for LP10. Push for early commitments — use the scarcity narrative.</div></div>
-          <div class="dash-card"><div class="dash-card-title">Retail category heating</div><div style="font-size:13px;color:var(--text-secondary);line-height:1.6">3 retail brands in your pipeline. Category conflict rules apply — check Adman before confirming Harvey Norman.</div></div>
-        </div>
-        <div class="ai-ask">
-          <div class="ai-ask-label">Ask me anything</div>
-          <div class="ai-ask-row">
-            <input type="text" class="ai-input" placeholder="e.g. which clients haven't been contacted in 30 days?">
-            <button class="btn-primary sm">Ask</button>
-          </div>
-          <div class="ai-chips">
-            <button class="chip">Weekly to-do</button>
-            <button class="chip">Pipeline risks</button>
-            <button class="chip">Draft renewal email</button>
-            <button class="chip">Best time to call Harvey Norman</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- AVAILABILITY -->
-      <div id="screen-availability" class="screen">
-        <div class="screen-header">
-          <div><h1>Availability</h1><p class="screen-sub">Live from Adman · updated 4 min ago</p></div>
-          <div class="header-actions">
-            <select class="select-sm"><option>LP9 2026</option><option>LP10 2026</option></select>
-            <select class="select-sm"><option>Brisbane Metro</option><option>Gold Coast</option></select>
-          </div>
-        </div>
-        <div class="avail-legend">
-          <span class="al-item"><span class="al-dot green"></span>Available</span>
-          <span class="al-item"><span class="al-dot amber"></span>On hold</span>
-          <span class="al-item"><span class="al-dot red"></span>Booked</span>
-          <span class="al-count">47 sites · 6 on hold · 31 available</span>
-        </div>
-        <div class="table-card">
-          <table class="data-table">
-            <thead><tr><th></th><th>Site</th><th>Format</th><th>Status</th><th>Hold client</th><th>Rate (LP)</th><th></th></tr></thead>
-            <tbody>
-              <tr>
-                <td><span class="status-dot green"></span></td>
-                <td><div class="client-name">201 Leichhardt St, Spring Hill</div><div class="client-sub">23276 · City inbound</div></td>
-                <td><span class="pill pill-dark">Iconic</span></td>
-                <td><span class="pill pill-green">Available</span></td>
-                <td class="text-muted">—</td>
-                <td class="text-muted">$41,650</td>
-                <td><button class="btn-primary sm">Select</button></td>
-              </tr>
-              <tr>
-                <td><span class="status-dot amber"></span></td>
-                <td><div class="client-name">148 Brunswick St, Fortitude Valley</div><div class="client-sub">23286 · City outbound</div></td>
-                <td><span class="pill pill-dark">Iconic</span></td>
-                <td><span class="pill pill-amber">On hold</span></td>
-                <td class="text-muted" style="color:#854F0B;font-weight:500">Harvey Norman</td>
-                <td class="text-muted">$65,000</td>
-                <td><button class="btn-ghost sm" disabled>Held</button></td>
-              </tr>
-              <tr>
-                <td><span class="status-dot red"></span></td>
-                <td><div class="client-name">764 Sandgate Rd, Clayfield</div><div class="client-sub">23288 · North outbound</div></td>
-                <td><span class="pill pill-blue">Digital</span></td>
-                <td><span class="pill pill-red">Booked</span></td>
-                <td class="text-muted" style="color:#A32D2D;font-weight:500">QLD Rail</td>
-                <td class="text-muted">$18,200</td>
-                <td><button class="btn-ghost sm" disabled>Booked</button></td>
-              </tr>
-              <tr>
-                <td><span class="status-dot green"></span></td>
-                <td><div class="client-name">656 South Pine Rd, Eatons Hill</div><div class="client-sub">23292 · North</div></td>
-                <td><span class="pill pill-blue">Digital</span></td>
-                <td><span class="pill pill-green">Available</span></td>
-                <td class="text-muted">—</td>
-                <td class="text-muted">$14,800</td>
-                <td><button class="btn-primary sm">Select</button></td>
-              </tr>
-              <tr>
-                <td><span class="status-dot green"></span></td>
-                <td><div class="client-name">Enoggera Rd, Newmarket</div><div class="client-sub">23295 · North</div></td>
-                <td><span class="pill pill-gray">Static</span></td>
-                <td><span class="pill pill-green">Available</span></td>
-                <td class="text-muted">—</td>
-                <td class="text-muted">$8,200</td>
-                <td><button class="btn-primary sm">Select</button></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- PROPOSAL BUILDER -->
-      <div id="screen-proposal" class="screen">
-        <div class="screen-header">
-          <div><h1>Proposal builder</h1><p class="screen-sub">Alliance Media · LP9 2026 · Draft</p></div>
-          <div class="header-actions">
-            <button class="btn-ghost sm">Preview PDF</button>
-            <button class="btn-primary sm">Submit for approval</button>
-          </div>
-        </div>
-        <div class="proposal-layout">
-          <div class="proposal-sites">
-            <div class="proposal-label">3 sites selected</div>
-            <div class="proposal-site-card">
-              <div class="psc-thumb"></div>
-              <div class="psc-info">
-                <div class="psc-name">201 Leichhardt St, Spring Hill</div>
-                <div class="psc-sub">23276 · ICONIC · 8 secs · City inbound</div>
-                <div class="psc-dates"><span class="date-badge">2 Feb – 1 Mar 2026</span><span class="psc-dur">4 weeks</span></div>
-              </div>
-              <button class="psc-remove">×</button>
-            </div>
-            <div class="proposal-site-card">
-              <div class="psc-thumb"></div>
-              <div class="psc-info">
-                <div class="psc-name">764 Sandgate Rd, Clayfield</div>
-                <div class="psc-sub">23288 · DIGITAL · 15 secs · North</div>
-                <div class="psc-dates"><span class="date-badge">2 Feb – 1 Mar 2026</span><span class="psc-dur">4 weeks</span></div>
-              </div>
-              <button class="psc-remove">×</button>
-            </div>
-            <div class="proposal-site-card">
-              <div class="psc-thumb"></div>
-              <div class="psc-info">
-                <div class="psc-name">656 South Pine Rd, Eatons Hill</div>
-                <div class="psc-sub">23292 · DIGITAL · 15 secs · North</div>
-                <div class="psc-dates"><span class="date-badge">2 Feb – 1 Mar 2026</span><span class="psc-dur">4 weeks</span></div>
-              </div>
-              <button class="psc-remove">×</button>
-            </div>
-            <div class="proposal-notes-label">Notes for client</div>
-            <textarea class="proposal-notes" placeholder="Add context or rationale…"></textarea>
-          </div>
-          <div class="proposal-summary">
-            <div class="ps-title">Summary</div>
-            <div class="ps-total"><div class="ps-total-label">Total investment</div><div class="ps-total-val">$48,300</div></div>
-            <div class="ps-rows">
-              <div class="ps-row"><span>Sites</span><span>3</span></div>
-              <div class="ps-row"><span>Period</span><span>LP9 2026</span></div>
-              <div class="ps-row"><span>Format</span><span>Digital + Iconic</span></div>
-              <div class="ps-row"><span>Weeks</span><span>4</span></div>
-            </div>
-            <div class="ps-approval-label">Approval route</div>
-            <div class="ps-approval">Sales lead → State GM → Finance<br><span>Est. 24–48hr</span></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- APPROVALS -->
-      <div id="screen-approvals" class="screen">
-        <div class="screen-header">
-          <div><h1>Approvals</h1><p class="screen-sub">3 pending · 1 approved this week</p></div>
-        </div>
-        <div class="tabs">
-          <button class="tab active" onclick="setTab(this)">Pending (3)</button>
-          <button class="tab" onclick="setTab(this)">Approved</button>
-          <button class="tab" onclick="setTab(this)">History</button>
-        </div>
-        <div class="approval-card">
-          <div class="approval-card-header">
-            <div><div class="approval-name">Alliance Media · LP9 2026</div><div class="approval-sub">3 sites · $48,300 · Submitted 10 min ago</div></div>
-            <span class="pill pill-amber">Awaiting GM</span>
-          </div>
-          <div class="approval-steps">
-            <div class="apstep done"><div class="apstep-dot">✓</div><div class="apstep-info"><div class="apstep-label">Sales lead</div><div class="apstep-sub">Approved · 10 min ago</div></div></div>
-            <div class="apstep-line"></div>
-            <div class="apstep active"><div class="apstep-dot">2</div><div class="apstep-info"><div class="apstep-label">State GM</div><div class="apstep-sub">Pending · Est. 2–4 hrs</div></div></div>
-            <div class="apstep-line"></div>
-            <div class="apstep"><div class="apstep-dot">3</div><div class="apstep-info"><div class="apstep-label">Finance</div><div class="apstep-sub">Unlocks after GM</div></div></div>
-          </div>
-          <div class="approval-card-footer">
-            <button class="btn-ghost sm">View proposal</button>
-            <button class="btn-ghost sm">Nudge approver</button>
-            <button class="btn-danger sm">Withdraw</button>
-          </div>
-        </div>
-        <div class="approval-card">
-          <div class="approval-card-header">
-            <div><div class="approval-name">Suncorp · Q1 static run</div><div class="approval-sub">6 sites · $91,500 · Approved · Artwork pending</div></div>
-            <span class="pill pill-amber">Artwork due</span>
-          </div>
-          <div class="artwork-tracker">
-            <div class="at-label">Artwork status</div>
-            <div class="at-row"><span class="at-dot green"></span><span class="at-name">Suncorp_BNE_Digital_1920x640.jpg</span><span class="at-status">Received</span></div>
-            <div class="at-row"><span class="at-dot amber"></span><span class="at-name">Static 6×3m print-ready</span><span class="at-status amber">Due in 2 days</span></div>
-          </div>
-          <div class="approval-card-footer">
-            <button class="btn-ghost sm">Send artwork link</button>
-            <button class="btn-primary sm">Upload artwork</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- BRAND HUB -->
-      <div id="screen-brand" class="screen">
-        <div class="screen-header">
-          <div><h1>Brand hub</h1><p class="screen-sub">goa knowledge base</p></div>
-        </div>
-        <div class="brand-grid">
-          <div class="brand-card">
-            <div class="brand-card-icon red"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
-            <div class="brand-card-title">Brand guidelines</div>
-            <div class="brand-card-body">Logo, colour, typography, tone of voice. Everything to present goa correctly.</div>
-            <div class="brand-card-meta">Updated Mar 2026</div>
-          </div>
-          <div class="brand-card">
-            <div class="brand-card-icon blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-            <div class="brand-card-title">Creative specs</div>
-            <div class="brand-card-body">File formats, sizes, resolution and production requirements for all formats.</div>
-            <div class="brand-card-meta">Digital + Static + Iconic</div>
-          </div>
-          <div class="brand-card">
-            <div class="brand-card-icon green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-            <div class="brand-card-title">Product catalogue</div>
-            <div class="brand-card-body">All goa formats — Iconic, Digital, Static, Stream, Civic. What and where.</div>
-            <div class="brand-card-meta">47 QLD sites</div>
-          </div>
-          <div class="brand-card">
-            <div class="brand-card-icon amber"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-            <div class="brand-card-title">Policies &amp; processes</div>
-            <div class="brand-card-body">Booking policies, discount thresholds, approval frameworks, category conflicts.</div>
-            <div class="brand-card-meta">Sales handbook</div>
-          </div>
-        </div>
-        <div class="policy-list">
-          <div class="policy-item"><div class="policy-title">Discount approval thresholds</div><div class="policy-body">0–10%: Sales lead. 11–20%: State GM. 21%+: GM + Finance. No exceptions.</div></div>
-          <div class="policy-item"><div class="policy-title">Category conflict rules</div><div class="policy-body">Competing brands may not run same panel in same LP. Check Adman before confirming.</div></div>
-          <div class="policy-item"><div class="policy-title">Artwork deadlines</div><div class="policy-body">Digital: 5 business days before go-live. Static: 10 business days. Late artwork at client cost.</div></div>
-          <div class="policy-item"><div class="policy-title">Hold policy</div><div class="policy-body">Sites held for max 5 business days. Hold expires unless contract is signed.</div></div>
-        </div>
-      </div>
-
+    <main class="main-content" id="main-content">
+      <div id="screen-contacts" class="screen active"></div>
+      <div id="screen-prospects" class="screen"></div>
+      <div id="screen-bookings" class="screen"></div>
+      <div id="screen-renewals" class="screen"></div>
+      <div id="screen-dashboard" class="screen"></div>
+      <div id="screen-reports" class="screen"></div>
+      <div id="screen-ai" class="screen"></div>
+      <div id="screen-availability" class="screen"></div>
+      <div id="screen-proposal" class="screen"></div>
+      <div id="screen-approvals" class="screen"></div>
+      <div id="screen-brand" class="screen"></div>
     </main>
   </div>
 </div>
-
+<div id="modal-overlay" class="modal-overlay" onclick="closeModal()"><div id="modal-container"></div></div>
+<script src="sites_data.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
