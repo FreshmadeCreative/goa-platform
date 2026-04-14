@@ -21,12 +21,12 @@ document.addEventListener('click',closeActionMenus);
 
 function renderAll(){
   renderContacts();renderProspects();renderBookings();renderRenewals();
-  renderDashboard();renderReports();renderInsights();renderAI();
+  renderDashboard();renderReports();renderInsights();renderTeam();renderAI();
   renderAvailability();renderProposal();renderApprovals();renderBrand();renderModals();
 }
 function renderScreen(id){
   ({contacts:renderContacts,prospects:renderProspects,bookings:renderBookings,renewals:renderRenewals,
-    dashboard:renderDashboard,reports:renderReports,insights:renderInsights,ai:renderAI,
+    dashboard:renderDashboard,reports:renderReports,insights:renderInsights,team:renderTeam,ai:renderAI,
     availability:renderAvailability,proposal:renderProposal,approvals:renderApprovals,brand:renderBrand})[id]?.();
 }
 
@@ -115,7 +115,7 @@ function renderRenewals(){
   <div class="renewal-framework"><div class="rf-title">Renewal framework</div><div class="rf-steps"><div class="rf-step"><div class="rf-step-label">60 days out</div><div class="rf-step-body">Send post-campaign report. Open conversation.</div></div><div class="rf-arrow">→</div><div class="rf-step"><div class="rf-step-label">30 days out</div><div class="rf-step-body">Present new avails. Confirm budget. Send proposal.</div></div><div class="rf-arrow">→</div><div class="rf-step"><div class="rf-step-label">7 days out</div><div class="rf-step-body">Follow up. Generate report. Push to close.</div></div></div></div>
   <div class="table-card"><table class="data-table"><thead><tr><th>Client</th><th>Due</th><th>Est. value</th><th>Stage</th><th>Actions</th></tr></thead><tbody>
     <tr><td><div class="client-cell"><div class="avatar av-green">QL</div><div><div class="client-name">Queensland Rail</div><div class="client-sub">Sarah Kim</div></div></div></td><td><span class="pill pill-red">7 days</span></td><td class="fw5">$52k</td><td><span class="pill pill-amber">Proposal out</span></td>
-    <td><div style="display:flex;gap:6px"><button class="btn-primary sm" onclick="generatePPTX('postcampaign','Queensland Rail','LP9 2026 · 2 Feb – 1 Mar 2026')">↓ Post-campaign PPTX</button></div></td></tr>
+    <td><div style="display:flex;gap:6px"><button class="btn-primary sm" onclick="showModal('modal-report')">Generate post-campaign report</button></div></td></tr>
     <tr><td><div class="client-cell"><div class="avatar av-blue">SC</div><div><div class="client-name">Suncorp</div><div class="client-sub">Emma Walsh</div></div></div></td><td><span class="pill pill-amber">28 days</span></td><td class="fw5">$45k</td><td><span class="pill pill-blue">Avails sent</span></td>
     <td><button class="btn-ghost sm">Build proposal</button></td></tr>
   </tbody></table></div>`;
@@ -328,7 +328,89 @@ function askAI(key){
   chat.scrollTop=chat.scrollHeight;
 }
 
-// ─── AVAILABILITY — GANTT ─────────────────────────────────────────────────────
+// ─── TEAM LEADERBOARD ─────────────────────────────────────────────────────────
+function renderTeam(){
+  const el=$('screen-team');
+  const team=[
+    {name:'Hannah F.',role:'Senior · QLD',av:'HF',cls:'av-red',revenue:612000,target:750000,deals:8,pipeline:180000,avg:76500,renewal:92,trend:'+18%',up:true,rank:1,badges:['🔥 Top biller','⭐ 3 month streak']},
+    {name:'James B.',role:'Mid · QLD',av:'JB',cls:'av-blue',revenue:487000,target:600000,deals:6,pipeline:145000,avg:81167,renewal:88,trend:'+6%',up:true,rank:2,badges:['📈 Growing']},
+    {name:'Sarah M.',role:'Senior · QLD',av:'SM',cls:'av-green',revenue:441000,target:600000,deals:5,pipeline:92000,avg:88200,renewal:95,trend:'+2%',up:true,rank:3,badges:['🤝 Highest retention']},
+    {name:'Chris T.',role:'Junior · QLD',av:'CT',cls:'av-purple',revenue:198000,target:350000,deals:4,pipeline:68000,avg:49500,renewal:75,trend:'-4%',up:false,rank:4,badges:[]},
+    {name:'Nina P.',role:'Mid · QLD',av:'NP',cls:'av-blue',revenue:162000,target:300000,deals:3,pipeline:44000,avg:54000,renewal:82,trend:'+11%',up:true,rank:5,badges:['🚀 Most improved']},
+  ];
+  const total=team.reduce((s,m)=>s+m.revenue,0);
+  const totalTarget=team.reduce((s,m)=>s+m.target,0);
+  el.innerHTML=`<div class="screen-header"><div><h1>Team</h1><p class="screen-sub">QLD sales team · YTD 2026</p></div>
+    <div class="header-actions"><select class="select-sm"><option>YTD 2026</option><option>Q1 2026</option><option>LP9 2026</option></select></div>
+  </div>
+  <div class="metric-grid four">
+    <div class="metric-card"><div class="metric-label">Team revenue YTD</div><div class="metric-val">$${(total/1000).toFixed(0)}k</div><div class="metric-delta">${Math.round(total/totalTarget*100)}% of team target</div></div>
+    <div class="metric-card"><div class="metric-label">Team target</div><div class="metric-val">$${(totalTarget/1000).toFixed(0)}k</div><div class="metric-delta">Full year QLD</div></div>
+    <div class="metric-card"><div class="metric-label">Active reps</div><div class="metric-val">${team.length}</div><div class="metric-delta">QLD portfolio</div></div>
+    <div class="metric-card"><div class="metric-label">Team avg renewal</div><div class="metric-val">${Math.round(team.reduce((s,m)=>s+m.renewal,0)/team.length)}%</div><div class="metric-delta up">+3% vs last year</div></div>
+  </div>
+
+  <div class="leaderboard-card">
+    <div class="lb-header">
+      <div class="lb-title">Revenue leaderboard · YTD 2026</div>
+      <div class="lb-legend"><span class="lb-leg-item"><span class="lb-leg-bar red"></span>Revenue</span><span class="lb-leg-item"><span class="lb-leg-bar gray"></span>Target</span></div>
+    </div>
+    ${team.map((m,i)=>{
+      const pct=Math.round(m.revenue/m.target*100);
+      const isMe=m.name==='Hannah F.';
+      return`<div class="lb-row ${isMe?'lb-me':''}">
+        <div class="lb-rank">${['🥇','🥈','🥉','4','5'][i]}</div>
+        <div class="lb-avatar"><div class="avatar ${m.cls}">${m.av}</div></div>
+        <div class="lb-info">
+          <div class="lb-name">${m.name}${isMe?' <span class="lb-you">you</span>':''}</div>
+          <div class="lb-role">${m.role}</div>
+          ${m.badges.length?`<div class="lb-badges">${m.badges.map(b=>`<span class="lb-badge">${b}</span>`).join('')}</div>`:''}
+        </div>
+        <div class="lb-bar-wrap">
+          <div class="lb-bar-track"><div class="lb-bar-fill" style="width:${Math.min(pct,100)}%"></div></div>
+          <div class="lb-bar-target" style="left:${Math.min(100,100)}%"></div>
+        </div>
+        <div class="lb-stats">
+          <div class="lb-stat-main">$${(m.revenue/1000).toFixed(0)}k</div>
+          <div class="lb-stat-sub">${pct}% of $${(m.target/1000).toFixed(0)}k target</div>
+        </div>
+        <div class="lb-trend ${m.up?'up':'dn'}">${m.trend}</div>
+      </div>`;
+    }).join('')}
+  </div>
+
+  <div class="dash-grid" style="margin-top:16px">
+    <div class="dash-card">
+      <div class="dash-card-title">Avg deal size</div>
+      <div class="team-stat-list">
+        ${team.map(m=>`<div class="tsl-row"><div class="client-cell" style="gap:8px"><div class="avatar ${m.cls} sm">${m.av}</div><span class="client-name">${m.name}</span></div>
+        <div class="tsl-bar-wrap"><div class="tsl-bar" style="width:${Math.round(m.avg/100000*100)}%"></div></div>
+        <span class="tsl-val">$${(m.avg/1000).toFixed(0)}k</span></div>`).join('')}
+      </div>
+    </div>
+    <div class="dash-card">
+      <div class="dash-card-title">Pipeline vs revenue</div>
+      <div class="team-stat-list">
+        ${team.map(m=>`<div class="tsl-row"><div class="client-cell" style="gap:8px"><div class="avatar ${m.cls} sm">${m.av}</div><span class="client-name">${m.name}</span></div>
+        <div style="display:flex;flex-direction:column;gap:3px;flex:1">
+          <div style="display:flex;gap:4px;align-items:center"><div class="tsl-bar" style="width:${Math.round(m.revenue/800000*100)}%;background:var(--dark)"></div><span style="font-size:10px;color:var(--muted)">$${(m.revenue/1000).toFixed(0)}k</span></div>
+          <div style="display:flex;gap:4px;align-items:center"><div class="tsl-bar" style="width:${Math.round(m.pipeline/200000*100)}%;background:var(--red)"></div><span style="font-size:10px;color:var(--muted)">+$${(m.pipeline/1000).toFixed(0)}k</span></div>
+        </div></div>`).join('')}
+      </div>
+    </div>
+    <div class="dash-card">
+      <div class="dash-card-title">Renewal rate</div>
+      <div class="team-stat-list">
+        ${team.map(m=>`<div class="tsl-row"><div class="client-cell" style="gap:8px"><div class="avatar ${m.cls} sm">${m.av}</div><span class="client-name">${m.name}</span></div>
+        <div class="tsl-bar-wrap"><div class="tsl-bar" style="width:${m.renewal}%;background:${m.renewal>=90?'#059669':m.renewal>=80?'#d97706':'#C8102E'}"></div></div>
+        <span class="tsl-val ${m.renewal>=90?'green':m.renewal<80?'red':''}">${m.renewal}%</span></div>`).join('')}
+      </div>
+    </div>
+  </div>`;
+  el.dataset.rendered='1';
+}
+
+
 let availSelSites=new Set();
 function renderAvailability(){
   const el=$('screen-availability');
@@ -382,6 +464,8 @@ function getActiveLPs(){
   return LP_DATA.filter(lp=>lp.start<=to&&lp.end>=from);
 }
 
+let selectedLP=null;
+
 function renderGantt(){
   const wrap=$('gantt-wrap');if(!wrap)return;
   const search=($('avail-search')?.value||'').toLowerCase();
@@ -399,16 +483,20 @@ function renderGantt(){
     if(size&&s.size_cat!==size)return false;
     if(loc&&s.location!==loc)return false;
     if(rate){const r=s.lunar_rate||0;if(rate==='low'&&r>=50000)return false;if(rate==='mid'&&(r<50000||r>150000))return false;if(rate==='high'&&r<=150000)return false;}
-    if(statusF){const vals=activeLPs.map(lp=>s.lp_avail[lp.start]||'');if(statusF==='available'&&!vals.includes('available'))return false;if(statusF==='booked'&&vals.includes('available'))return false;}
+    if(statusF){const vals=activeLPs.map(lp=>s.lp_avail?.[lp.start]||'');if(statusF==='available'&&!vals.includes('available'))return false;if(statusF==='booked'&&vals.includes('available'))return false;}
     return true;
   });
 
   const sub=$('avail-sub');if(sub)sub.textContent=`${sites.length} sites · ${from?fmtDate(from)+' – '+fmtDate(to):'all periods'}`;
   const cl=$('avail-count-lbl');if(cl)cl.textContent=`Showing ${Math.min(sites.length,150)} of ${SITES_DATA.length} sites`;
 
-  if(!sites.length){wrap.innerHTML='<div class="gantt-empty">No sites match the current filters.</div>';return;}
+  if(!sites.length){wrap.innerHTML='<div class="gantt-empty">No sites match the current filters. Try adjusting format, location or availability.</div>';return;}
 
-  const hdrs=activeLPs.map((lp,i)=>{const lpNum=LP_DATA.indexOf(lp)+1;return`<div class="gantt-col-hdr"><div class="gantt-lp-num">LP${lpNum}</div><div class="gantt-lp-date">${fmtDateShort(lp.start)}</div></div>`;}).join('');
+  const hdrs=activeLPs.map((lp,i)=>{
+    const lpNum=LP_DATA.indexOf(lp)+1;
+    const isSelected=selectedLP===lp.start;
+    return`<div class="gantt-col-hdr ${isSelected?'lp-col-selected':''}" onclick="selectLP('${lp.start}')" title="Click to view schedule for LP${lpNum}"><div class="gantt-lp-num">LP${lpNum}</div><div class="gantt-lp-date">${fmtDateShort(lp.start)}</div></div>`;
+  }).join('');
 
   const rows=sites.slice(0,150).map(s=>{
     const sel=availSelSites.has(s.ims);
@@ -418,21 +506,67 @@ function renderGantt(){
       const v=s.lp_avail?.[lp.start];
       const cls=v==='available'?'gb-avail':v==='booked'?'gb-booked':'gb-nd';
       const label=v==='available'?'Free':v==='booked'?'Booked':'—';
-      return`<div class="gantt-block ${cls}" title="${label}">${label}</div>`;
+      const isSelected=selectedLP===lp.start;
+      return`<div class="gantt-block ${cls}${isSelected?' lp-col-highlight':''}" title="${s.name} · LP${LP_DATA.indexOf(lp)+1}: ${label}">${label}</div>`;
     }).join('');
     return`<div class="gantt-row ${sel?'gantt-sel':''}" data-ims="${s.ims}">
       <div class="gantt-site-info">
         <input type="checkbox" class="avail-cb" ${sel?'checked':''} onchange="toggleGanttSite('${s.ims}',this)" onclick="event.stopPropagation()">
         <div><div class="gantt-site-name">${s.name}</div>
         <div class="gantt-meta"><span class="pill ${s.format==='Digital'?'pill-blue':'pill-gray'} xs">${s.size_cat||s.format}</span><span class="gantt-loc">${s.location}</span><span class="gantt-dir">${s.direction}</span></div>
-        <div class="gantt-rate">${rateStr}<span class="gantt-next">${nextAvail?'Next: '+fmtDateShort(nextAvail[0]):'Fully booked'}</span></div></div>
+        <div class="gantt-rate">${rateStr}<span class="gantt-next">${nextAvail?'✓ Next: '+fmtDateShort(nextAvail[0]):'Fully booked'}</span></div></div>
       </div>
       <div class="gantt-blocks">${blocks}</div>
     </div>`;
   }).join('');
 
-  wrap.innerHTML=`<div class="gantt-table"><div class="gantt-header"><div class="gantt-site-col-hdr">Site <span style="font-weight:400;font-size:10px;color:var(--muted)">/ Format / Rate</span></div><div class="gantt-cols-hdr">${hdrs}</div></div><div class="gantt-body">${rows}</div></div>`;
+  // LP selection panel
+  const lpPanel=selectedLP?renderLPPanel(selectedLP,sites):'';
+
+  wrap.innerHTML=`<div class="gantt-table">
+    <div class="gantt-header"><div class="gantt-site-col-hdr">Site <span style="font-weight:400;font-size:10px;color:var(--muted)">/ Format / Rate</span></div><div class="gantt-cols-hdr">${hdrs}</div></div>
+    <div class="gantt-body">${rows}</div>
+  </div>${lpPanel}`;
 }
+
+function selectLP(lpStart){
+  selectedLP=(selectedLP===lpStart)?null:lpStart;
+  renderGantt();
+}
+
+function renderLPPanel(lpStart,sites){
+  const lp=LP_DATA.find(l=>l.start===lpStart);
+  const lpNum=LP_DATA.indexOf(lp)+1;
+  const avail=sites.filter(s=>s.lp_avail?.[lpStart]==='available');
+  const booked=sites.filter(s=>s.lp_avail?.[lpStart]==='booked');
+  return`<div class="lp-panel">
+    <div class="lp-panel-header">
+      <div><div class="lp-panel-title">LP${lpNum} · ${fmtDate(lp.start)} – ${fmtDate(lp.end)}</div>
+      <div class="lp-panel-sub">${avail.length} available · ${booked.length} booked · from filtered results</div></div>
+      <button class="btn-ghost sm" onclick="selectedLP=null;renderGantt()">✕ Close</button>
+    </div>
+    <div class="lp-panel-cols">
+      <div class="lp-panel-col">
+        <div class="lp-panel-col-title green">✓ Available (${avail.length})</div>
+        ${avail.slice(0,20).map(s=>`<div class="lp-site-row">
+          <input type="checkbox" class="avail-cb" ${availSelSites.has(s.ims)?'checked':''} onchange="toggleGanttSite('${s.ims}',this)">
+          <div><div class="lp-site-name">${s.name}</div>
+          <div class="lp-site-sub">${s.size_cat||s.format} · ${s.location} · ${s.lunar_rate?'$'+Number(s.lunar_rate).toLocaleString():'—'}</div></div>
+        </div>`).join('')}
+        ${avail.length===0?'<div class="lp-empty">No available sites in this LP matching filters.</div>':''}
+      </div>
+      <div class="lp-panel-col">
+        <div class="lp-panel-col-title red">● Booked (${booked.length})</div>
+        ${booked.slice(0,10).map(s=>`<div class="lp-site-row booked">
+          <div><div class="lp-site-name">${s.name}</div>
+          <div class="lp-site-sub">${s.size_cat||s.format} · ${s.location}</div></div>
+        </div>`).join('')}
+        ${booked.length===0?'<div class="lp-empty">No booked sites in this LP matching filters.</div>':''}
+      </div>
+    </div>
+  </div>`;
+}
+
 
 function toggleGanttSite(ims,cb){if(cb.checked)availSelSites.add(ims);else availSelSites.delete(ims);cb.closest('.gantt-row')?.classList.toggle('gantt-sel',cb.checked);updateSelBar();}
 function updateSelBar(){const b=$('avail-sel-bar'),c=$('avail-sel-cnt');if(b)b.style.display=availSelSites.size>0?'flex':'none';if(c)c.textContent=`${availSelSites.size} site${availSelSites.size!==1?'s':''} selected`;}
@@ -553,7 +687,18 @@ function renderModals(){
   <div id="modal-warn-po" class="modal" onclick="event.stopPropagation()"><div class="modal-header"><h3>Warning · QLD Rail · PO outstanding</h3><button class="modal-close" onclick="closeModal()">×</button></div><div class="modal-body"><div class="warn-detail-block"><div class="wdb-row"><span class="wdb-label">PO ref</span><span>QR-2026-047</span></div><div class="wdb-row"><span class="wdb-label">Amount</span><span class="fw5">$48,200</span></div><div class="wdb-row"><span class="wdb-label">Due</span><span style="color:#A32D2D;font-weight:600">28 Feb 2026 (overdue)</span></div><div class="wdb-row"><span class="wdb-label">Contact</span><span>Sarah Kim · s.kim@queenslandrail.com.au</span></div></div></div><div class="modal-footer"><button class="btn-ghost sm" onclick="closeModal()">Cancel</button><button class="btn-primary sm">Chase PO · Email Sarah</button></div></div>
   <div id="modal-bonus-report" class="modal" onclick="event.stopPropagation()"><div class="modal-header"><h3>Generate bonus report</h3><button class="modal-close" onclick="closeModal()">×</button></div><div class="modal-body"><div class="form-grid-2"><div class="form-group"><label>From</label><input type="date" id="bonus-from" value="2026-01-01"></div><div class="form-group"><label>To</label><input type="date" id="bonus-to" value="2026-03-31"></div></div><div class="bonus-preview-table"><div class="bpt-title">Preview — LP9 2026</div><table class="data-table"><thead><tr><th>Client</th><th>Paid</th><th>Bonus</th><th>%</th></tr></thead><tbody><tr><td>Suncorp</td><td class="fw5">$248k</td><td>$31k</td><td><span class="pill pill-green">12.5%</span></td></tr><tr><td>QLD Rail</td><td class="fw5">$184k</td><td>$28k</td><td><span class="pill pill-amber">15.2%</span></td></tr><tr><td>Alliance</td><td class="fw5">$91k</td><td>$12k</td><td><span class="pill pill-green">13.2%</span></td></tr></tbody></table></div></div><div class="modal-footer"><button class="btn-ghost sm" onclick="closeModal()">Cancel</button><button class="btn-primary sm" onclick="generateBonusXLSX();closeModal()">↓ Export XLSX</button></div></div>
   <div id="modal-new-proposal" class="modal" onclick="event.stopPropagation()"><div class="modal-header"><h3>New proposal</h3><button class="modal-close" onclick="closeModal()">×</button></div><div class="modal-body"><div class="form-grid-2"><div class="form-group"><label>Client</label><select><option>Select…</option><option>Suncorp</option><option>Alliance Media</option><option>QLD Rail</option><option>Harvey Norman</option></select></div><div class="form-group"><label>Period</label><select><option>LP9 2026</option><option>LP10 2026</option><option>LP11 2026</option></select></div><div class="form-group"><label>Objective</label><input type="text" placeholder="Brand awareness…"></div><div class="form-group"><label>Budget</label><input type="text" placeholder="$50,000"></div></div></div><div class="modal-footer"><button class="btn-ghost sm" onclick="closeModal()">Cancel</button><button class="btn-primary sm" onclick="closeModal();nav(document.querySelectorAll('.nav-item')[9],'availability')">Browse availability →</button></div></div>
-  <div id="modal-package-builder" class="modal" onclick="event.stopPropagation()"><div class="modal-header"><h3>Package builder</h3><button class="modal-close" onclick="closeModal()">×</button></div><div class="modal-body"><p style="font-size:13px;color:var(--muted)">Use the full Package builder in the Insights tab to generate AI-recommended site packages at 3 price points.</p></div><div class="modal-footer"><button class="btn-primary sm" onclick="closeModal();nav(document.querySelectorAll('.nav-item')[6],'insights')">Go to Insights →</button></div></div>`;
+  <div id="modal-package-builder" class="modal" onclick="event.stopPropagation()"><div class="modal-header"><h3>Package builder</h3><button class="modal-close" onclick="closeModal()">×</button></div><div class="modal-body"><p style="font-size:13px;color:var(--muted)">Use the full Package builder in the Insights tab to generate AI-recommended site packages at 3 price points.</p></div><div class="modal-footer"><button class="btn-primary sm" onclick="closeModal();nav(document.querySelectorAll('.nav-item')[6],'insights')">Go to Insights →</button></div></div>
+  <div id="modal-report" class="modal" onclick="event.stopPropagation()"><div class="modal-header"><h3>Generate post-campaign report</h3><button class="modal-close" onclick="closeModal()">×</button></div><div class="modal-body">
+    <div class="form-group"><label>Client</label><input type="text" id="rpt-client" value="Queensland Rail"></div>
+    <div class="form-grid-2"><div class="form-group"><label>Campaign period</label><input type="text" id="rpt-period" value="LP9 2026 · 2 Feb – 1 Mar 2026"></div><div class="form-group"><label>Prepared by</label><input type="text" id="rpt-by" value="Hannah F. · Senior Sales QLD"></div></div>
+    <div class="form-group"><label>Include sections</label><div class="checkbox-group">
+      <label class="checkbox-label"><input type="checkbox" checked> Campaign overview &amp; site list</label>
+      <label class="checkbox-label"><input type="checkbox" checked> Performance results &amp; impressions</label>
+      <label class="checkbox-label"><input type="checkbox" checked> Delivery summary &amp; uptime</label>
+      <label class="checkbox-label"><input type="checkbox" checked> Investment summary &amp; CPM</label>
+      <label class="checkbox-label"><input type="checkbox" checked> Renewal recommendation</label>
+    </div></div>
+  </div><div class="modal-footer"><button class="btn-ghost sm" onclick="closeModal()">Cancel</button><button class="btn-primary sm" onclick="generatePPTX('postcampaign',$('rpt-client').value,$('rpt-period').value);closeModal()">↓ Generate PPTX</button></div></div>`;
 }
 
 // ─── CLIENT-SIDE PPTX EXPORT ──────────────────────────────────────────────────
