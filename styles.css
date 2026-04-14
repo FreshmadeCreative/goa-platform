@@ -486,3 +486,64 @@ select.select-sm{font-family:var(--font);font-size:12px;padding:6px 10px;border:
 .todo-item:last-child{border-bottom:none}
 .todo-item.urgent{color:var(--dark)}
 .todo-day{font-weight:600;color:var(--red);width:28px;flex-shrink:0}
+
+/* ─── TEAM LEADERBOARD ────────────────────────────────────────────────────────*/
+.leaderboard-card{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:16px}
+.lb-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border)}
+.lb-title{font-size:13px;font-weight:600;color:var(--dark)}
+.lb-legend{display:flex;gap:14px;font-size:11px;color:var(--muted)}
+.lb-leg-item{display:flex;align-items:center;gap:5px}
+.lb-leg-bar{display:inline-block;width:16px;height:4px;border-radius:2px}
+.lb-leg-bar.red{background:var(--red)}
+.lb-leg-bar.gray{background:#e5e7eb}
+.lb-row{display:flex;align-items:center;gap:14px;padding:14px 18px;border-bottom:1px solid #f3f4f6;transition:background .1s}
+.lb-row:last-child{border-bottom:none}
+.lb-row:hover{background:#fafafa}
+.lb-row.lb-me{background:#fff8f8;border-left:3px solid var(--red)}
+.lb-rank{width:24px;font-size:16px;text-align:center;flex-shrink:0}
+.lb-avatar{flex-shrink:0}
+.lb-info{width:160px;flex-shrink:0}
+.lb-name{font-size:12px;font-weight:600;color:var(--dark)}
+.lb-you{font-size:9px;background:var(--red);color:white;padding:1px 5px;border-radius:10px;font-weight:600;margin-left:4px}
+.lb-role{font-size:10px;color:var(--muted);margin-top:1px}
+.lb-badges{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}
+.lb-badge{font-size:9px;background:var(--lt);border:1px solid var(--border);border-radius:10px;padding:1px 6px;color:var(--mid)}
+.lb-bar-wrap{flex:1;position:relative}
+.lb-bar-track{height:7px;background:#f3f4f6;border-radius:4px;overflow:hidden}
+.lb-bar-fill{height:100%;background:var(--red);border-radius:4px;transition:width .4s ease}
+.lb-stats{width:110px;flex-shrink:0;text-align:right}
+.lb-stat-main{font-size:15px;font-weight:700;color:var(--dark)}
+.lb-stat-sub{font-size:10px;color:var(--muted);margin-top:1px}
+.lb-trend{width:44px;flex-shrink:0;font-size:11px;font-weight:600;text-align:right}
+.lb-trend.up{color:var(--green)}
+.lb-trend.dn{color:var(--red)}
+.team-stat-list{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+.tsl-row{display:flex;align-items:center;gap:10px;font-size:11px}
+.tsl-bar-wrap{flex:1;height:5px;background:#f3f4f6;border-radius:3px;overflow:hidden}
+.tsl-bar{height:5px;background:var(--red);border-radius:3px;transition:width .4s}
+.tsl-val{width:36px;text-align:right;font-weight:600;color:var(--dark);font-size:11px}
+.tsl-val.green{color:var(--green)}
+.tsl-val.red{color:var(--red)}
+.avatar.sm{width:24px;height:24px;font-size:9px}
+
+/* ─── LP SELECTION PANEL ──────────────────────────────────────────────────────*/
+.gantt-col-hdr{cursor:pointer;transition:background .12s}
+.gantt-col-hdr:hover{background:#f0f9ff}
+.lp-col-selected{background:#dbeafe!important;color:var(--blue)!important}
+.lp-col-highlight{border-left:2px solid #3b82f6!important;border-right:2px solid #3b82f6!important}
+.lp-panel{border:1px solid #bfdbfe;border-radius:10px;background:#eff6ff;margin-top:14px;overflow:hidden}
+.lp-panel-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#dbeafe;border-bottom:1px solid #bfdbfe}
+.lp-panel-title{font-size:13px;font-weight:600;color:#1e40af}
+.lp-panel-sub{font-size:11px;color:#3b82f6;margin-top:2px}
+.lp-panel-cols{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.lp-panel-col{padding:14px 16px;border-right:1px solid #bfdbfe}
+.lp-panel-col:last-child{border-right:none}
+.lp-panel-col-title{font-size:11px;font-weight:600;margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em}
+.lp-panel-col-title.green{color:var(--green)}
+.lp-panel-col-title.red{color:var(--red)}
+.lp-site-row{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid #bfdbfe;font-size:12px}
+.lp-site-row:last-child{border-bottom:none}
+.lp-site-row.booked{opacity:.6}
+.lp-site-name{font-weight:500;color:var(--dark)}
+.lp-site-sub{font-size:10px;color:var(--muted);margin-top:1px}
+.lp-empty{font-size:11px;color:var(--muted);padding:8px 0;font-style:italic}
