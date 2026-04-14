@@ -6,6 +6,9 @@
 <title>goa platform</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<!-- Client-side export libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PptxGenJS/3.12.0/pptxgen.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
 <div id="login-page" class="page active">
@@ -51,6 +54,7 @@
         <div class="nav-section">Analytics</div>
         <a class="nav-item" onclick="nav(this,'dashboard')" href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Dashboard</a>
         <a class="nav-item" onclick="nav(this,'reports')" href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Reports</a>
+        <a class="nav-item" onclick="nav(this,'insights')" href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 8v4l3 3"/><path d="M18 2l4 4-4 4"/><path d="M22 6H18"/></svg>Insights<span class="nav-badge green">New</span></a>
         <a class="nav-item" onclick="nav(this,'ai')" href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>AI buddy</a>
         <div class="nav-section">Workspace</div>
         <a class="nav-item" onclick="nav(this,'availability')" href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Availability</a>
@@ -65,13 +69,14 @@
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:auto;opacity:0.35"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
       </div>
     </aside>
-    <main class="main-content" id="main-content">
+    <main class="main-content">
       <div id="screen-contacts" class="screen active"></div>
       <div id="screen-prospects" class="screen"></div>
       <div id="screen-bookings" class="screen"></div>
       <div id="screen-renewals" class="screen"></div>
       <div id="screen-dashboard" class="screen"></div>
       <div id="screen-reports" class="screen"></div>
+      <div id="screen-insights" class="screen"></div>
       <div id="screen-ai" class="screen"></div>
       <div id="screen-availability" class="screen"></div>
       <div id="screen-proposal" class="screen"></div>
